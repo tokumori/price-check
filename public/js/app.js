@@ -7,11 +7,14 @@
  */
 function getProductsByLocation (lat, lng) {
   var location = {
-    /* location object */
+    latitude: lat,
+    longitude: lng,
   };
   var products = getProducts(location);
   return products;
 }
+
+getProductsByLocation(21.3069, -157.8583);
 
 /**
  * Gets the products from a certain location.
@@ -22,7 +25,7 @@ function getProducts (location) {
   return $.ajax({
     type: "GET",
     data: location,
-    url: /* Backend URL */,
+    url: '/products',
     async: false
   });
 }
