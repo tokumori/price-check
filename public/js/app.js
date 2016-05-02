@@ -8,14 +8,38 @@
 function getProductsByLocation (lat, lng) {
   var location = {
     latitude: lat,
-    longitude: lng,
+    longitude: lng
   };
   var products = getProducts(location);
   return products;
 }
 
-getProductsByLocation(21.3069, -157.8583);
+var productPrices = getProductsByLocation(21.3069, -157.8583);
 
+var display = document.getElementById('main');
+var product = productPrices.responseJSON.products;
+
+for (var i = 0; i < product.length; i++) {
+  console.log(product);
+
+  var displayName = document.createElement('h3');
+  displayName.innerHTML = product[i].display_name;
+  display.appendChild(displayName);
+
+  var descrip = document.createElement('p');
+  descrip.innerHTML = product[i].description;
+  display.appendChild(descrip);
+
+  var priceDetails = product[i].price_details;
+
+  for (var prop in priceDetails){
+    // console.log(prop);
+    // console.log(priceDetails[prop]);
+    var price = document.createElement('p');
+    price.innerHTML = prop + ": " + priceDetails[prop];
+    display.appendChild(price);
+  }
+}
 /**
  * Gets the products from a certain location.
  * @param  {object} The location object to query
